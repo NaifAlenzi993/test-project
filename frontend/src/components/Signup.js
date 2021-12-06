@@ -11,19 +11,20 @@ export default function Signup() {
 
     const hestory = useHistory()
     const onclickSignup = async()=> {
-       const response =  axios.post("http://localhost:5000/signUp" , {
+       try {
+        const response = await axios.post("http://localhost:5000/signUp" , {
             name: inputUsername ,
             email: inputEmail ,
             password: inputPassword
         })
-
         if (response.status === 201){
             hestory.push("/login")
-        }else{
-            hestory.push("/signup")
         }
+       } catch (error) {
+           console.log(error);
+       }
+       
 
-        console.log(response.data);
     
     }
     return (

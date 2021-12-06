@@ -2,14 +2,17 @@
 import axios from "axios";
 import "./style.css"
 
-import Courses from "./components/courses";
+import Hotels from "./components/hotels";
 import Login from "./components/Login";
 import Signup from "./components/Signup";
 import Navbar from "./components/Navbar"
 import {Route} from "react-router-dom";
 import  {useEffect , useState} from "react";
 import Home from "./components/Home"
-import Book from "./components/Book";
+import BookSelect from "./components/BookSelect";
+import Book from "./Book";
+import "bootstrap/dist/css/bootstrap.css"
+
 // import "bootstrap/dist/css/"
 
 
@@ -34,8 +37,8 @@ function App() {
 
       <Navbar token={token} setToken={setToken} setName = {setName} name = {name}></Navbar>
 
-      <Route exact path= "/courses" render={() => {
-        return <Courses token = {token} setToken = {setToken} userId={userId}/>
+      <Route exact path= "/hotels" render={() => {
+        return <Hotels token = {token} setToken = {setToken} userId={userId}/>
       }} />
 
     
@@ -49,7 +52,12 @@ function App() {
       }/>
 
       <Route exact path= "/book/:id" render={() => (
-        <Book />
+        <BookSelect token = {token} userId={userId} />
+      )
+      }/>
+
+      <Route exact path= "/book" render={() => (
+        <Book token={token} userId={userId}/>
       )
       }/>
 

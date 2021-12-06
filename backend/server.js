@@ -12,13 +12,15 @@ const port = 5000
 ///////////
 
 const hotelRoute = require("./Routers/routes/hotelRoute")
-app.use(hotelRoute)
 const signUpRoute = require("./Routers/routes/signUpRoute")
 const loginRoute  = require("./Routers/routes/loginRoute")
 const  userRoute = require("./Routers/routes/userRoute")
+const bookRoute = require("./Routers/routes/bookRoute")
+app.use(hotelRoute)
 app.use(signUpRoute)
 app.use(loginRoute)
 app.use(userRoute)
+app.use(bookRoute)
 
 ///////////
 app.listen( port , ()=>{

@@ -19,7 +19,10 @@ export default function Navbar({token , setToken , setName , name}) {
                 <Link id = "link-nav" to="/Home">الرئيسية</Link>
             </ul>
             <ul>
-                <Link id = "link-nav" to="/courses">الفنادق</Link>
+                <Link id = "link-nav" to="/hotels">الفنادق</Link>
+            </ul>
+            <ul>
+                <Link id = "link-nav" to="/book">حجوزاتي</Link>
             </ul>
             <ul>
                 <Link onClick={()=>{logout()}} id = "link-nav" to="/login">تسجيل خروج</Link>

@@ -1,5 +1,15 @@
 const hotelsModel = require("../../db/models/hotelModel")
 
+const bookSelect = async (req , res) => {
+    const id = req.params.id;
+    try {
+        const cour = await hotelsModel.find({_id : id}).populate("user")
+        res.status(200).json(cour)
+    } catch (error) {
+        console.log(error);
+    }
+}
+
 const addhotel =  async (req , res)=>{
         const {name , description , img} = req.body;
         const rate = 5
@@ -17,13 +27,9 @@ const addhotel =  async (req , res)=>{
 
 const deletehotel = async (req , res)=>{
         let id = req.params.id
-
-
         const userId = req.token.userId
         // console.log(req.token.userId);
         // console.log(id);
-        
-        
 
         console.log(userId);
      
@@ -78,4 +84,4 @@ const gethotel = async (req , res)=>{
 
 
 
-    module.exports = {addhotel , deletehotel  , gethotel , updatehotel , deleteAll}
+    module.exports = {addhotel , deletehotel  , gethotel , updatehotel , deleteAll , bookSelect}
