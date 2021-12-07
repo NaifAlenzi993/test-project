@@ -1,11 +1,12 @@
 
 import axios from "axios";
 import React , {useEffect , useState } from "react";
-import BookSelect from "./components/BookSelect";
+
 
 export default function Book({token,userId}) {
 
     const [bookd, setBookd] = useState([])
+    const [message, setMessage] = useState("")
     
 
     useEffect(() => {
@@ -14,32 +15,59 @@ export default function Book({token,userId}) {
             const respone = await axios.get("http://localhost:5000/book" , {headers: { authorization: `Bearer ${token}` }})
             setBookd(respone.data); 
              console.log(respone.data);
+             console.log(userId);
+             console.log(token);
         }
         getData();
-    }, [])
+    }, [token])
 
 
   const deletbook= async (id)=>{
     const respone = await axios.delete("http://localhost:5000/book/"+id , {headers: { authorization: `Bearer ${token}` }})
-            setBookd(respone.data); 
-             console.log(respone.data);
+        setBookd(respone.data); 
+        console.log(respone.data);
+       
   }
 
     return (
-        <div>
+        <div className="idBook">
+            
 
 {bookd.map((elem,i)=>{
-    return <div className="idBook">
-   <p> {elem.name}</p>
-    {elem.startData}
-    {elem.expiryData}
+    return <div >
+
+
+    
+    {/* <div className="idBook">
+        <p> {elem.name} <b>:بداية الحجز</b></p>
+        <p> {elem.startData} <b>:نهاية الحجز</b></p>
+        <p> {elem.expiryData} </p> 
+    </div> */}
+    
     {/* {elem._id} */}
 
-    {/* <img src={BookSelect.} alt="" /> */}
+    {/* <h3>{message}</h3> */}
 
-    <button onClick={()=>{deletbook(elem._id)}} id="btn" class="btn btn-primary">
+
+    {userId === elem.user._id ?  <div className="card p-2" style={{width: "15rem"}}>
+    <img src={elem.hotel.img} className="card-img-top" alt="" />
+
+    <div className="card-body">
+    <h5 className="card-title">{elem.name}</h5>
+    {/* <p className="card-text">{elem.hotel.description
+}</p> */}
+    <hr />
+    <p> {elem.user.name} <b>:تم حجز الفندق بأسم </b></p>
+    <p> {elem.startData} <b>:بداية الحجز</b></p>
+    <p> {elem.expiryData} <b>:نهاية الحجز</b></p>
+    <button onClick={()=>{deletbook(elem._id)}} id="btn" class="btn btn-danger">
         الغاء الحجز
-     </button>
+    </button>
+    </div>
+
+</div> : ""}
+
+   
     </div>
 })}
 

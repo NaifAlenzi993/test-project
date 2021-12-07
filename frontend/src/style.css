@@ -64,21 +64,35 @@
     color: wheat;
     font-size: large;
 }
+
+#warning-booking-select{
+    width: 100%;
+    background-color: rgb(155, 241, 159);
+    border: 1px solid green;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    padding: 15px;
+    font-size: 20px;
+}
+
 body{
-    background-image: url("https://images.pexels.com/photos/6474532/pexels-photo-6474532.jpeg?auto=compress&cs=tinysrgb&dpr=1&w=500");
+    background: url("https://images.pexels.com/photos/1334605/pexels-photo-1334605.jpeg?auto=compress&cs=tinysrgb&dpr=1&w=500") ;
+    /* background-image: url("https://images.pexels.com/photos/6474532/pexels-photo-6474532.jpeg?auto=compress&cs=tinysrgb&dpr=1&w=500"); */
     /* background-repeat: no-repeat;
     background-size: 1200px; */
     
 }
 .home{
-    background-color: rgba(7, 7, 7, 0.425);
+    background-color: rgba(230, 218, 218, 0.514);
     text-align: center;
     width: 80%;
     padding: 15px;
     margin: auto;
-    margin-top: 50px;
+    margin-top: 15px;
     font-size: x-large;
     border-radius: 10px;
+    color: black;
 }
 
 
@@ -132,19 +146,32 @@ body{
 }
 
 .idBook{
-    background-color: rgba(245, 245, 245, 0.507);
-    width: 400px;
-    height: 150px;
-    margin-top: 5px;
-    border-radius: 10px;
-    text-align: center;
-    font-size: x-large;
-    text-shadow: 2px 2px 5px rgb(77, 56, 56);
-    display: flex;
-    flex-direction: column;
-    margin: auto;
-margin-top: 10px;
+        width: 80%;
+        height: 100%;
+        margin: auto;
+        display: flex;
+        justify-content: center;
+        align-items: center;
     }
+
+#booking-ob{
+    width: 150px;
+    margin-top: 5px;
+    margin: auto;
+
+}
+#booking-ob *{
+    margin-top: 5px;
+}
+
+.card{
+    width: 70%;
+    margin: auto;
+}
+
+#card-booking{
+    display: flex;
+}
 
  #btn{
     width:  150px;
@@ -206,3 +233,9 @@ margin-top: 10px;
     margin: auto;
 }
 
+
+/* 
+#img1{
+    background: url(https://cf.bstatic.com/xdata/images/city/540x270/691303.webp?k=0d2a322…&o=) no-repeat center center;
+    background-size: cover;
+} */

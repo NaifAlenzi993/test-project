@@ -8,6 +8,8 @@ export default function Signup() {
     const [inputUsername, setInputUsername] = useState("")
     const [inputEmail, setInputEmail] = useState("")
     const [inputPassword, setInputPassword] = useState("")
+    const [bool, setBool] = useState(false)
+    const [message, setMessage] = useState("تم تسجيل حسابك بنجاح سوف يتم نقلك لصفحة تسجيل الدخول , شكرا لك")
 
     const hestory = useHistory()
     const onclickSignup = async()=> {
@@ -17,9 +19,13 @@ export default function Signup() {
             email: inputEmail ,
             password: inputPassword
         })
-        if (response.status === 201){
-            hestory.push("/login")
-        }
+            setBool(true)
+            setTimeout(()=> { 
+                hestory.push("/login")
+                setBool(false)
+            } , 2500)
+            
+        
        } catch (error) {
            console.log(error);
        }
@@ -29,10 +35,10 @@ export default function Signup() {
     }
     return (
         <div id='login'>
-        <input onChange={(e)=>{setInputUsername(e.target.value)}} type="text" placeholder='username' />  
+        {!bool ? <><input onChange={(e)=>{setInputUsername(e.target.value)}} type="text" placeholder='username' />  
         <input onChange={(e)=>{setInputEmail(e.target.value)}} type="text" placeholder='email' />
         <input onChange={(e)=>{setInputPassword(e.target.value)}} type="password" placeholder='password'/>
-        <button onClick={()=> {onclickSignup()}}>signup</button>
+        <button onClick={()=> {onclickSignup()}}>signup</button></> : <div className='p-3' style={{fontSize: "20px"}} id='warning-booking-select'>{message}</div>}
         </div>
     )
 }

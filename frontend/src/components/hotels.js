@@ -139,7 +139,6 @@ function Hotels({token ,userId}) {
         </div>
       })}
       
-      
     </div>
   );
 }

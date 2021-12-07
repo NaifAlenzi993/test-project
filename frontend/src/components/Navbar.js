@@ -3,11 +3,13 @@ import { Link } from "react-router-dom";
 import "../style.css"
 
 
-export default function Navbar({token , setToken , setName , name}) {
+export default function Navbar({token , setToken , setName , name , setUserId}) {
 
     const logout = ()=>{
         setToken("")
+        setUserId("")
          localStorage.setItem("token" , JSON.stringify(""))
+         localStorage.setItem("userId" , JSON.stringify(""))
         setName("")
     }
 

@@ -1,5 +1,9 @@
 import React from 'react'
 import { useHistory } from 'react-router-dom';
+import { Stack } from 'react-bootstrap';
+import Collapse from './Collapse';
+
+
 
 export default function Home() {
     const hestory = useHistory()
@@ -8,8 +12,10 @@ export default function Home() {
     }
     return (
         <div>
+           
+             <Collapse></Collapse>
             <div className="home">
-               <p> اهلا بك في bookHotel نقوم بمساعدتك لايجاد سكنك الخاص في وقت بسيط </p>
+               <p> اهلا بك  , نقوم بمساعدتك لايجاد سكنك الخاص في وقت بسيط </p>
             </div>
         </div>
     )

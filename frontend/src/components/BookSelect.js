@@ -7,8 +7,9 @@ export default function BookSelect({token,userId}) {
     const { id }= useParams()
 
     const [bookSelect, setBookSelect] = useState({})
-const [inputstart   , setInputstart] = useState("")
-const [expir  , setExpir] = useState("")
+    const [inputstart   , setInputstart] = useState("")
+    const [expir  , setExpir] = useState("")
+    const [bool, setBool] = useState(false)
     useEffect(() => {
 
         axios.get(`http://localhost:5000/bookselect/${id}` , 
@@ -16,23 +17,28 @@ const [expir  , setExpir] = useState("")
         )
         .then(res => {
         const data = res.data;
-        console.log(data);
+        // console.log(data);
         setBookSelect(data[0]);
         }).catch(err => console.log(err))
 
-    }, [])
+    }, [token])
 
-    const addBook=async()=>{
+    const addBook=async(idHotel)=>{
     const respons =await axios.post("http://localhost:5000/book", 
     {
-        name: bookSelect.name ,
+       name: bookSelect.name ,
        startData: inputstart,
        expiryData: expir ,
        user: userId,
-       hotel: id,
+       hotel: idHotel,
     }
     ,
     {headers: { authorization: `Bearer ${token}` }} )
+
+    setBool(true)
+    setTimeout(()=> { 
+        setBool(false)
+    } , 2000)
     // console.log(respons.data);
     }
 
@@ -44,16 +50,36 @@ const [expir  , setExpir] = useState("")
           </div>
           <div class="card-body">
             <p class="card-text">{bookSelect.description}</p>
+
+            <div id='card-booking'>
+
+            <div>
             <img src={bookSelect.img} alt="" />
             <h1>{bookSelect.price} S.R</h1>
-            <button onClick={()=>{addBook()}} href="#" class="btn btn-primary">
+            </div>
+            
+            <div id='booking-ob'>
+            <label htmlFor="start">بداية الحجز</label>
+            <input dir="rtl" name='start' onChange={(e)=>{setInputstart(e.target.value)}} type="date" placeholder="بداية الحجز" />
+            <label htmlFor="exp">نهاية الحجز</label>
+            <input dir="rtl" name='exp' onChange={(e)=>{setExpir(e.target.value)}} type="date" placeholder='نهاية الحجز'/>
+            <button onClick={()=>{addBook(bookSelect._id)}} href="#" class="btn btn-primary">
               احجز الان
             </button>
-    <input onChange={(e)=>{setInputstart(e.target.value)}} type="text" placeholder="بداية الحجز" />
-    <input onChange={(e)=>{setExpir(e.target.value)}} type="text" placeholder='نهاية الحجز'/>
+            </div>
 
+            </div>
+
+
+           {bool && <p id='warning-booking-select'>تم أضافة الحجز بنجاح</p>}
+            
           </div>
         </div>
+
+
+    
+
+
       </div>
     );
 }

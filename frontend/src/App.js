@@ -13,6 +13,7 @@ import BookSelect from "./components/BookSelect";
 import Book from "./Book";
 import "bootstrap/dist/css/bootstrap.css"
 
+
 // import "bootstrap/dist/css/"
 
 
@@ -23,11 +24,13 @@ function App() {
   const [token, setToken] = useState("")
   const [userId, setUserId] = useState("")
   const [name , setName] = useState("")
-
+  
   useEffect(() => { 
       if (!token) {
           const mytoken = JSON.parse(localStorage.getItem("token"))
+          const myuserId = JSON.parse(localStorage.getItem("userId"))
           setToken(mytoken)
+          setUserId(myuserId)
       }
   }, [])
  
@@ -35,7 +38,7 @@ function App() {
   return (
     <div >
 
-      <Navbar token={token} setToken={setToken} setName = {setName} name = {name}></Navbar>
+      <Navbar token={token} setToken={setToken} setName = {setName} name = {name} setUserId = {setUserId}></Navbar>
 
       <Route exact path= "/hotels" render={() => {
         return <Hotels token = {token} setToken = {setToken} userId={userId}/>

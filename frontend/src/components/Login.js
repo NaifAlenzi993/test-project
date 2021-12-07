@@ -14,6 +14,8 @@ export default function Login({setToken , token , setName,setUserId}) {
 
     const [ShowWartinig, setShowWartinig] = useState(false)
 
+    const [loginIsOkey, setLoginIsOkey] = useState("")
+
 
 
     const onClickLogin = async ()=> {
@@ -26,9 +28,15 @@ export default function Login({setToken , token , setName,setUserId}) {
             setUserId(response.data.userId)
             // setName(email)
             localStorage.setItem("token",JSON.stringify(response.data.token))
+            localStorage.setItem("userId",JSON.stringify(response.data.userId))
             console.log(response.data.token);
-            hestory.push("/courses")
+            
             setStateLogin("login Done !")
+            setLoginIsOkey("تم تسجيل دخولك وسوف يتم تحويلك الى صفحة الفنادق")
+            setTimeout(()=> {
+                setLoginIsOkey("")
+                hestory.push("/hotels")
+            },2500)
         } catch (error) {
             if (error.response.status === 404) {
                 console.log(error.response);
@@ -57,7 +65,9 @@ export default function Login({setToken , token , setName,setUserId}) {
     }
 
     return (
-        <div id='form'>
+    <div id='form'>
+        {
+            loginIsOkey === "" ? <>
             <div id='login'>
             
             <input onChange={(e)=>{setEmail(e.target.value)}} type="text" placeholder='email' />
@@ -69,6 +79,11 @@ export default function Login({setToken , token , setName,setUserId}) {
                 <FaExclamationCircle style={{fontSize : "27px"}}/>
                      <p style={{ textAlign : "center" }}>{stateLogin}</p>
             </div> : ""}
-        </div>
+            </> : 
+            <div className='p-5' style={{fontSize: "20px"}} id='warning-booking-select'>
+                {loginIsOkey}
+            </div>}
+        
+    </div>
     )
 }
